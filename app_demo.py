@@ -1,7 +1,8 @@
 import streamlit as st
-import dashboard_demo as dashboard_demo
-import registry_demo as registry_demo
-import predict_demo as predict_demo
+import streamlit.components.v1 as components
+import dashboard_demo
+import registry_demo
+import predict_demo
 
 st.set_page_config(
     page_title="BRAIN - Demo",
