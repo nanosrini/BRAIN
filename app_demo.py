@@ -41,8 +41,6 @@ def go(screen):
     st.rerun()
 
 # Import demo screens
-from screens_demo import dashboard_demo, registry_demo, predict_demo
-
 import streamlit as st
 
 # Initialize screen
