@@ -136,7 +136,6 @@ elif st.session_state.screen == "registry":
     registry_demo.show()
 
 elif st.session_state.screen == "predict":
-    predict_demo.show()    st.session_state.screen = "login"
 
 # Navigation function
 def go(screen):
