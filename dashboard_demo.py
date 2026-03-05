@@ -4,7 +4,10 @@ import streamlit.components.v1 as components
 
 def show():
 
-    st.title("BRAIN — AI Surveillance Dashboard")
+    st.markdown(
+        "<h1 style='color:#000000;'>BRAIN — AI Surveillance Dashboard</h1>",
+        unsafe_allow_html=True
+    )
 
     col1, col2, col3, col4 = st.columns(4)
 
@@ -78,21 +81,67 @@ def show():
     # 🧠 AI RISK RANKING
     # ─────────────────────────────────────────
 
-    st.subheader("🧠 AI Risk Ranking")
+    st.markdown(
+        "<h1 style='color:#000000;'>🧠 AI Risk Ranking</h1>",
+        unsafe_allow_html=True
+    )
 
     for disease in PREDICTIONS:
-        with st.container(border=True):
-            c1, c2 = st.columns([4, 1])
+        progress_width = disease["risk_score"]
 
-            with c1:
-                st.markdown(f"**{disease['disease']}**")
+        html = f"""
+        <div style="
+            background:#F0F9FF;
+            padding:18px;
+            border-radius:18px;
+            border:1px solid #E0F2FE;
+            box-shadow:0 2px 6px rgba(0,0,0,0.04);
+            margin-bottom:16px;
+            font-family:sans-serif;
+        ">
 
-            with c2:
-                st.markdown(
-                    f"<span style='color:{disease['color']}; font-weight:700;'>"
-                    f"{disease['risk_level']}</span>",
-                    unsafe_allow_html=True
-                )
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:center;
+                font-size:16px;
+                font-weight:600;
+                color:#0F172A;
+            ">
+                <div>{disease['disease']}</div>
 
-            st.progress(disease["risk_score"] / 100)
-            st.caption(f"Risk Score: {disease['risk_score']}/100")
+                <div style="
+                    color:{disease['color']};
+                    font-weight:700;
+                ">
+                    {disease['risk_level']}
+                </div>
+            </div>
+
+            <div style="
+                width:100%;
+                background:#E5E7EB;
+                height:8px;
+                border-radius:6px;
+                margin-top:12px;
+                overflow:hidden;
+            ">
+                <div style="
+                    width:{progress_width}%;
+                    background:{disease['color']};
+                    height:100%;
+                "></div>
+            </div>
+
+            <div style="
+                font-size:12px;
+                color:#64748B;
+                margin-top:8px;
+            ">
+                Risk Score: {disease['risk_score']}/100
+            </div>
+
+        </div>
+        """
+
+        components.html(html, height=130)
