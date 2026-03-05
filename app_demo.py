@@ -74,26 +74,17 @@ if st.session_state.screen != "login":
 
 if st.session_state.get("menu_open", False):
 
-    st.markdown("""
-    <div style="
-        background:#0F172A;
-        padding:20px;
-        border-radius:16px;
-        margin-top:10px;
-        width:220px;
-    ">
-    </div>
-    """, unsafe_allow_html=True)
+    menu_col1, menu_col2, menu_col3 = st.columns([1,2,5])
 
-    if st.button("Dashboard", use_container_width=True):
-        go("home")
+    with menu_col1:
+        if st.button("Dashboard"):
+            go("home")
 
-    if st.button("Registry", use_container_width=True):
-        go("registry")
+        if st.button("Registry"):
+            go("registry")
 
-    if st.button("AI Predictions", use_container_width=True):
-        go("predict")
-
+        if st.button("AI Predictions"):
+            go("predict")
 # ─────────────────────────────────────────
 # Login Screen (Demo Mode)
 # ─────────────────────────────────────────
