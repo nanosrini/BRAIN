@@ -1,7 +1,7 @@
 import streamlit as st
-import screens_demo.dashboard_demo as dashboard_demo
-import screens_demo.registry_demo as registry_demo
-import screens_demo.predict_demo as predict_demo
+import dashboard_demo
+import registry_demo
+import predict_demo
 import streamlit.components.v1 as components
 
 st.set_page_config(
