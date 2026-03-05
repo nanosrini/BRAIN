@@ -2,9 +2,11 @@ import streamlit as st
 from demo_data import SAMPLES
 
 def show():
-    st.title("📋 Registry")
 
-    st.caption("Conference Demo Mode — Sample Data")
+    st.markdown(
+        "<h1 style='color:#000000;'>📋 Registry</h1>",
+        unsafe_allow_html=True
+    )
 
     for s in SAMPLES:
         st.markdown(f"""
