@@ -73,20 +73,26 @@ if st.session_state.screen != "login":
 # ─────────────────────────────────────────
 
 if st.session_state.get("menu_open", False):
-    with st.sidebar:
-        st.title("🧬 BRAIN Demo")
 
-        if st.button("Dashboard"):
-            go("home")
+    st.markdown("""
+    <div style="
+        background:#0F172A;
+        padding:20px;
+        border-radius:16px;
+        margin-top:10px;
+        width:220px;
+    ">
+    </div>
+    """, unsafe_allow_html=True)
 
-        if st.button("Registry"):
-            go("registry")
+    if st.button("Dashboard", use_container_width=True):
+        go("home")
 
-        if st.button("AI Predictions"):
-            go("predict")
+    if st.button("Registry", use_container_width=True):
+        go("registry")
 
-        st.markdown("---")
-        st.caption("Conference Demo Mode")
+    if st.button("AI Predictions", use_container_width=True):
+        go("predict")
 
 # ─────────────────────────────────────────
 # Login Screen (Demo Mode)
