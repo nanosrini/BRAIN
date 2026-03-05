@@ -1,8 +1,9 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import dashboard_demo
 import registry_demo
 import predict_demo
-import streamlit.components.v1 as components
+
 
 st.set_page_config(
     page_title="BRAIN",
