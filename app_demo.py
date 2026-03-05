@@ -1,50 +1,79 @@
 import streamlit as st
+import screens_demo.dashboard_demo as dashboard_demo
+import screens_demo.registry_demo as registry_demo
+import screens_demo.predict_demo as predict_demo
 import streamlit.components.v1 as components
 
-import dashboard_demo
-import registry_demo
-import predict_demo
-
-
 st.set_page_config(
-    page_title="BRAIN - Demo",
+    page_title="BRAIN",
     page_icon="🧬",
     layout="centered"
 )
-
-# Global Style
 st.markdown("""
 <style>
+
+/* Main background */
 [data-testid="stAppViewContainer"],
 [data-testid="stHeader"],
 [data-testid="stSidebar"] {
     background-color: #FFFFFF;
 }
+
+/* Sidebar text */
+[data-testid="stSidebar"] {
+    color: #FFFFFF;
+}
+
+/* Hamburger button fix */
+div.stButton > button:first-child {
+    color: #FFFFFF !important;
+    background-color: #111827 !important;
+}
+
+/* Fix metric colors */
+[data-testid="stMetricLabel"] { color:#000000 !important; }
+[data-testid="stMetricValue"] { color:#000000 !important; }
+[data-testid="stMetricDelta"] { color:#16A34A !important; }
+
 </style>
 """, unsafe_allow_html=True)
 
-# Initialize screen
+# Force logged in
 if "screen" not in st.session_state:
     st.session_state.screen = "login"
 
-# Navigation helper
+# Navigation function
+def go(screen):
+    st.session_state.screen = screen
+    st.rerun()
+
+# Import demo screens
+from screens_demo import dashboard_demo, registry_demo, predict_demo
+
+import streamlit as st
+
+# Initialize screen
+if "screen" not in st.session_state:
+    st.session_state.screen = "home"
+
 def go(screen):
     st.session_state.screen = screen
     st.rerun()
 
 # ─────────────────────────────────────────
-# Hamburger (Not on Login)
+# 🔘 Hamburger Menu Button (Top Bar)
 # ─────────────────────────────────────────
 
 if st.session_state.screen != "login":
-    col1, col2 = st.columns([1, 9])
 
-    with col1:
+    top_col1, top_col2 = st.columns([1, 9])
+
+    with top_col1:
         if st.button("☰"):
             st.session_state.menu_open = not st.session_state.get("menu_open", False)
 
 # ─────────────────────────────────────────
-# Sidebar
+# 📂 Sidebar Menu (Hidden until clicked)
 # ─────────────────────────────────────────
 
 if st.session_state.get("menu_open", False):
@@ -64,9 +93,8 @@ if st.session_state.get("menu_open", False):
         st.caption("Conference Demo Mode")
 
 # ─────────────────────────────────────────
-# Login Screen
+# Login Screen (Demo Mode)
 # ─────────────────────────────────────────
-
 if st.session_state.screen == "login":
 
     components.html("""
@@ -101,6 +129,7 @@ if st.session_state.screen == "login":
     </div>
     """, height=600)
 
+    # Center button
     col1, col2, col3 = st.columns([1, 2, 1])
 
     with col2:
@@ -116,14 +145,18 @@ if st.session_state.screen == "login":
             font-size:16px !important;
             font-weight:600 !important;
         }
+        div.stButton > button:hover {
+            background:#000000 !important;
+            color:#FFFFFF !important;
+        }
         </style>
         """, unsafe_allow_html=True)
 
         if st.button("🔐 Login"):
-            go("home")
+            st.session_state.screen = "home"
+            st.rerun()
 
     st.stop()
-
 # ─────────────────────────────────────────
 # Router
 # ─────────────────────────────────────────
